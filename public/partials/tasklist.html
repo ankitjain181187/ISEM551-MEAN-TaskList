@@ -1,0 +1,66 @@
+<div class = "container">
+    <h1>My Task List</h1>
+
+    <hr/>
+
+   <h3>Task Controls</h3>
+    <form class="form-inline" name = "taskForm">
+        <div class = "form-group">
+            <label>Task Name *</label>
+            <input type = "text" class = "form-control" ng-model = "task.taskName" ng-required="true" placeholder = "Save World" />
+        </div>
+        <div class = "form-group">
+            <label >Description *</label>
+            <input type = "text" class = "form-control" ng-model = "task.taskDescription" ng-required="true" placeholder = "Save the burning world..." />
+        </div>
+        <div class = "form-group">
+            <label >Due Date *</label>
+            <input type = "date" class = "form-control" ng-model = "task.taskDueDate" value = "{{task.taskDueDate| date:'yyyy-MM-dd'}}" ng-required="true" />
+        </div>
+        <div class = "form-group">
+            <label >Progress * (0-100 %)</label>
+            <input type="number" class = "form-control"  min="0" max="100"  ng-model = "task.taskProgress" ng-required="true" />
+        </div>
+
+       <br/><br/>
+        <div style = "text-align: center;">
+            <button class = "btn btn-primary" ng-click = "taskForm.$valid && addTask()"   ng-disabled = "addDisabled == true">Add Task</button>
+            <button class = "btn btn-info" ng-click = "taskForm.$valid && updateTask()">Update Task</button>
+            <button class = "btn btn-success" ng-click = "clearTask()">Reset Task</button>
+        </div>
+    </form>
+
+    <hr/>
+
+    <h3>Task List</h3>
+
+    <table class = "table">
+
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Due Date</th>
+                <th>Progress</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat = "task in tasklist">
+                <td>{{task.taskName}}</td>
+                <td>{{task.taskDescription}}</td>
+                <td>{{task.taskDueDate | date:'MM/dd/yy, EEEE'}}</td>
+                 <td>
+                     <div class="progress">
+                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{task.taskProgress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{task.taskProgress}}%">
+                             <span style="color:black;">{{task.taskProgress}}%</span>
+                         </div>
+                     </div>
+                 </td>
+                <td><button class = "btn btn-warning"  ng-click = "editTask(task._id)" >Edit Task</button>
+                <button class = "btn btn-danger" ng-click = "deleteTask(task._id)">Delete Task</button></td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app = "myTaskList">
+    <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+        <title>My Task List</title>
+    </head>
+
+    <body>
+
+        <ng-view></ng-view>
+
+        <script src = "//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-route.min.js"></script>
+
+        <script>
+            var myTaskList = angular.module ('myTaskList', ['ngRoute']);
+
+            myTaskList.config(function ($routeProvider){
+                $routeProvider
+                        .when('/tasklist',
+                                {
+                                    controller:'taskListCtrl',
+                                    templateUrl:'partials/tasklist.html'
+                                }
+                        )
+
+                        .otherwise({redirectTo:'/tasklist'});
+            });
+
+        </script>
+
+        <script src = "controllers/mainController.js"></script>
+
+    </body>
+</html>
